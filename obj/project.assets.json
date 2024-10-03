@@ -8,24 +8,32 @@
     "net8.0": []
   },
   "packageFolders": {
-    "/home/gnarlsley/.nuget/packages/": {}
+    "C:\\Users\\kylan\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/gnarlsley/Desktop/Development/TextRPG/TextRPG.csproj",
+      "projectUniqueName": "C:\\Users\\kylan\\Source\\Repos\\Gnarlsley\\TextRPG\\TextRPG.csproj",
       "projectName": "TextRPG",
-      "projectPath": "/home/gnarlsley/Desktop/Development/TextRPG/TextRPG.csproj",
-      "packagesPath": "/home/gnarlsley/.nuget/packages/",
-      "outputPath": "/home/gnarlsley/Desktop/Development/TextRPG/obj/",
+      "projectPath": "C:\\Users\\kylan\\Source\\Repos\\Gnarlsley\\TextRPG\\TextRPG.csproj",
+      "packagesPath": "C:\\Users\\kylan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kylan\\Source\\Repos\\Gnarlsley\\TextRPG\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/home/gnarlsley/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\kylan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -38,6 +46,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -59,7 +72,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

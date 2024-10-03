@@ -12,8 +12,10 @@ enum Direction
 
 class GamePanel
 {
+ 
     static void Main(string[] args)
     {
+       
         Console.Clear();
         Console.WriteLine("TEXT RPG TALES");
         Console.WriteLine("Choose a name for your hero...");
@@ -105,24 +107,55 @@ class GamePanel
 
     static void Move(int[] position, Direction direction)
     {
+        NPC npc = new NPC(); // Create a new NPC with dialog
+
+        // Move the player based on the specified direction
         switch (direction)
         {
             case Direction.North:
                 position[1]++;
-                Console.WriteLine("You walk north");
+                Console.WriteLine("You walk north.");
                 break;
             case Direction.South:
                 position[1]--;
-                Console.WriteLine("You walk south");
+                Console.WriteLine("You walk south.");
                 break;
             case Direction.East:
                 position[0]++;
-                Console.WriteLine("You walk east");
+                Console.WriteLine("You walk east.");
                 break;
             case Direction.West:
                 position[0]--;
-                Console.WriteLine("You walk west");
+                Console.WriteLine("You walk west.");
                 break;
         }
+
+        // Check if the player has encountered the NPC
+        if (position[0] == 0 && position[1] == 1 && position[2] == 0)
+        {
+            Console.WriteLine("You encountered someone.");
+
+            string input;
+            do
+            {
+                Console.WriteLine("Would you like to talk to that person? (yes/no)");
+                input = Console.ReadLine().ToLower(); 
+
+                switch (input)
+                {
+                    case "yes":
+                        Console.WriteLine(npc.Dialog); 
+                        return; 
+                    case "no":
+                        Console.WriteLine("Bye");
+                        Console.WriteLine("Continue on"); 
+                        return; 
+                    default:
+                        Console.WriteLine("Invalid option. Please enter 'yes' or 'no'.");
+                        break; 
+                }
+            } while (true); 
+        }
     }
+
 }
