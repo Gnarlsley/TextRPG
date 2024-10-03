@@ -17,39 +17,82 @@ namespace Utilities
             return locations;
         }
 
-        public static void getCurrentCoordinates(int[] position)
+        public static void getCurrentCoordinates(int[] position, Location[] mapLocations)
         {
             Console.WriteLine($"Current Position: (x: {position[0]}, y: {position[1]}, z: {position[2]})");
+
+            if (isAtLocation(position, mapLocations))
+            {
+                Console.WriteLine("You are at a location");
+            }
+        }
+
+        public static bool isAtLocation(int[] position, Location[] mapLocations)
+        {
+            for (int i = 0; i < mapLocations.Length; i++)
+            {
+                if (position[0] == mapLocations[i].coordinates[0] && position[1] == mapLocations[i].coordinates[1])
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static void CheckNearbyLocations(int[] position, Location[] mapLocations)
         {
+            ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
             Console.WriteLine("Pinging nearby locations...");
+            Utility.loading();
+
+            int searchRange = 5;
+            Location nearestLocation = null;
+            int smallestDistance = 0;
 
             for (int i = 0; i < mapLocations.Length; i++)
             {
-                int deltaX = Math.Abs(position[0] - mapLocations[i].coordinates[0]);
-                int deltaY = Math.Abs(position[1] - mapLocations[i].coordinates[1]);
-                int maxDistance = Math.Max(deltaX, deltaY);
-                if (position[2] == mapLocations[i].coordinates[2])
+                if(position[2] == mapLocations[i].coordinates[2])
                 {
-                    if (position[0] == mapLocations[i].coordinates[0] && position[1] == mapLocations[i].coordinates[1])
+                    Location currentLocation = mapLocations[i];
+                    int deltaX = currentLocation.coordinates[0] - position[0];
+                    int deltaY = currentLocation.coordinates[1] - position[1];
+                    int maxDistance = Math.Max(Math.Abs(deltaX), Math.Abs(deltaY));
+
+                    if (maxDistance < smallestDistance || smallestDistance == 0)
                     {
-                        Console.WriteLine("You are at a location");
-                    }
-                    else if (maxDistance == 1)
-                    {
-                        Console.WriteLine("You feel the warmth of a roaring fire near you, the chanting gets louder");
-                    }
-                    else if (maxDistance <= 2)
-                    {
-                        Console.WriteLine("You hear faint chanting in the distance");
-                    }
-                    else if (maxDistance <= 3)
-                    {
-                        Console.WriteLine("You are near a point of interest");
+                        nearestLocation = currentLocation;
+                        smallestDistance = maxDistance;
+
                     }
                 }
+            }
+
+            if (nearestLocation != null && smallestDistance < searchRange)
+            {
+                if (position[0] == nearestLocation.coordinates[0] && position[1] == nearestLocation.coordinates[1])
+                {
+                    Console.WriteLine("You are at a location");
+                }
+                else if (smallestDistance == 1)
+                {
+                    Console.WriteLine("You feel the warmth of a roaring fire near you, the chanting gets louder");
+                }
+                else if (smallestDistance <= 2)
+                {
+                    Console.WriteLine("You hear faint chanting in the distance");
+                }
+                else if (smallestDistance <= 3)
+                {
+                    Console.WriteLine("You are near a point of interest");
+                }
+                else
+                {
+                    Console.WriteLine("Nothing located");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Nothing located");
             }
         }
 
@@ -58,7 +101,7 @@ namespace Utilities
             Console.WriteLine("Spirits, predict my path");
 
             int searchRange = 5;
-            Location nearestLocation = new Location();
+            Location nearestLocation = null;
             int smallestDistance = 0;
             int deltaX = 0;
             int deltaY = 0;
@@ -108,6 +151,10 @@ namespace Utilities
                             {
                                 Console.WriteLine( Math.Abs(deltaY) + " paces south");
                             }
+                        }
+                        else
+                        {
+                            Console.WriteLine("You feel a strong sense of belonging");
                         }
                 }
                 else

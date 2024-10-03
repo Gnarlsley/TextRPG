@@ -61,5 +61,23 @@ namespace Utilities
                 }
             }
         }
+
+        public static void loading()
+        {
+
+            Console.Write(".");
+            Thread.Sleep(500);
+
+            Console.Write(".");
+            Thread.Sleep(500);  
+
+            Console.Write(".");
+            Thread.Sleep(500);
+
+            // Clear the dots by moving the cursor back and overwriting with spaces
+            Console.SetCursorPosition(Console.CursorLeft - 3, Console.CursorTop);
+            Console.Write("   ");  // Three spaces to clear the dots
+            Console.SetCursorPosition(Console.CursorLeft - 3, Console.CursorTop);
+        }
     }
 }

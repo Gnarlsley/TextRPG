@@ -12,3 +12,4 @@
 /home/gnarlsley/Desktop/Development/TextRPG/obj/Debug/net8.0/TextRPG.pdb
 /home/gnarlsley/Desktop/Development/TextRPG/obj/Debug/net8.0/TextRPG.genruntimeconfig.cache
 /home/gnarlsley/Desktop/Development/TextRPG/obj/Debug/net8.0/ref/TextRPG.dll
+/home/gnarlsley/Desktop/Development/TextRPG/obj/Debug/net8.0/TextRPG.sourcelink.json

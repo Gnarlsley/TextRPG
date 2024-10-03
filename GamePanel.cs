@@ -12,6 +12,7 @@ enum Direction
 
 class GamePanel
 {
+
     static void Main(string[] args)
     {
         Console.Clear();
@@ -52,14 +53,14 @@ class GamePanel
 
         var commandActions = new Dictionary<string[], Action>
         {
-            { new[] { "North", "north", "N", "1" }, () => Move(position, Direction.North) },
-            { new[] { "South", "south", "S", "2" }, () => Move(position, Direction.South) },
-            { new[] { "East", "east", "E", "3" }, () => Move(position, Direction.East) },
-            { new[] { "West", "west", "W", "4" }, () => Move(position, Direction.West) },
+            { new[] { "North", "N", "1" }, () => Move(position, Direction.North) },
+            { new[] { "South", "S", "2" }, () => Move(position, Direction.South) },
+            { new[] { "East", "E", "3" }, () => Move(position, Direction.East) },
+            { new[] { "West", "W", "4" }, () => Move(position, Direction.West) },
             { new[] { "clear" }, Console.Clear },
             { new[] { "ping", "locate" }, () => MapUtility.CheckNearbyLocations(position, mapLocations) },
             { new[] { "divine" }, () => {MapUtility.CheckNearbyLocationsWithDirection(position, mapLocations, divineCharges); divineCharges--;} },
-            { new[] { "position" }, () => MapUtility.getCurrentCoordinates(position) },
+            { new[] { "position" }, () => MapUtility.getCurrentCoordinates(position, mapLocations) },
             { new[] { "quit", "exit"}, () => Console.WriteLine("Exiting...") }
         };
 
@@ -67,41 +68,43 @@ class GamePanel
 
         while(input != "quit" && input != "exit")
         {
-            input = Utility.ReadInputWithHistory(commandHistory, ref historyIndex);
+                bool wasAtLocation = MapUtility.isAtLocation(position, mapLocations);
 
-            if (commandHistory.Count >= historyMaximum)
-            {
-                commandHistory.RemoveAt(0);
-            }
-            commandHistory.Add(input);
+                input = Utility.ReadInputWithHistory(commandHistory, ref historyIndex);
 
-            bool commandFound = false;
-            foreach (var commandAction in commandActions)
-            {
-                // Check if input matches any of the command variants
-                if (Array.Exists(commandAction.Key, command => command.Equals(input, StringComparison.OrdinalIgnoreCase)))
+                if (commandHistory.Count >= historyMaximum)
                 {
-                    commandAction.Value.Invoke();
-                    commandFound = true;
-                    break; // Break after finding the first matching command
+                    commandHistory.RemoveAt(0);
                 }
-            }
+                commandHistory.Add(input);
 
-            if (!commandFound)
-            {
-                Console.WriteLine("Invalid command. Please enter a valid direction or 'quit' to exit.");
-            }
-
-            for (int i = 0; i < mapLocations.Length; i++)
-            {
-                if(position[0] == mapLocations[i].coordinates[0] && position[1] == mapLocations[i].coordinates[1] && position[2] == mapLocations[i].coordinates[2])
+                bool commandFound = false;
+                foreach (var commandAction in commandActions)
                 {
-                    Console.WriteLine("You reached a location");
+                    // Check if input matches any of the command variants
+                    if (Array.Exists(commandAction.Key, command => command.Equals(input, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        commandAction.Value.Invoke();
+                        commandFound = true;
+                        break; // Break after finding the first matching command
+                    }
                 }
-            }
 
+                bool isAtLocation = MapUtility.isAtLocation(position, mapLocations);
+
+                if (!commandFound)
+                {
+                    Console.WriteLine("Invalid command. Please enter a valid direction or 'quit' to exit.");
+                }
+
+                if (!wasAtLocation && isAtLocation)
+                {
+                    Console.WriteLine("You've reached a location");
+                }
         }
+
     }
+
 
     static void Move(int[] position, Direction direction)
     {
