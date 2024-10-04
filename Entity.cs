@@ -9,6 +9,7 @@ namespace TextRPG
         public int Speed { get; set; }
         public int Dexterity { get; set; }
         public int Defense { get; set; }
+        public int[] consumableCharges { get; set; }
 
         public Entity(string name, int health, int damage, int luck, int speed, int dexterity, int defense) 
         {
@@ -19,6 +20,7 @@ namespace TextRPG
             Speed = speed;
             Dexterity = dexterity;
             Defense = defense;
+            consumableCharges = new int[] {3};
         }
 
         public Entity()

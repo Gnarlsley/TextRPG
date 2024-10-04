@@ -79,5 +79,18 @@ namespace Utilities
             Console.Write("   ");  // Three spaces to clear the dots
             Console.SetCursorPosition(Console.CursorLeft - 3, Console.CursorTop);
         }
+
+        public static void falseInput()
+        {
+            GamePanel.isTaskRunning = true;
+            while (GamePanel.isTaskRunning)
+            {
+                if (Console.KeyAvailable)
+                {
+                    Console.ReadKey(true);
+                }
+            }
+
+        }
     }
 }
