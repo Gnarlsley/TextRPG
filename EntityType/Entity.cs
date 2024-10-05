@@ -1,6 +1,8 @@
-namespace TextRPG
+using System.Globalization;
+
+namespace EntityType
 {
-    class Entity
+    abstract class Entity
     {
         public string Name { get; set; }
         public int Health { get; set; }
@@ -9,19 +11,6 @@ namespace TextRPG
         public int Speed { get; set; }
         public int Dexterity { get; set; }
         public int Defense { get; set; }
-        public int[] consumableCharges { get; set; }
-
-        public Entity(string name, int health, int damage, int luck, int speed, int dexterity, int defense) 
-        {
-            Name = name;
-            Health = health;
-            Damage = damage;
-            Luck = luck;
-            Speed = speed;
-            Dexterity = dexterity;
-            Defense = defense;
-            consumableCharges = new int[] {3};
-        }
 
         public Entity()
         {
@@ -34,7 +23,7 @@ namespace TextRPG
         }
 
 
-        public string displayStats()
+        public string DisplayStats()
         {
             string msg = "";
             if(this.Health == -1)
