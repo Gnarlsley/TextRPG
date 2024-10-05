@@ -1,7 +1,12 @@
 Organized Project Files
+
+
 #######################
+
 Directories:
+
 DialogueType - 
+
     Class: Dialogue
         Enums: Mood
             Positive, Neutral, Negative
@@ -13,6 +18,7 @@ DialogueType -
         Methods: 
             Display
 EntityType -
+
     Abstract Class: Entity
         Attributes:
             Name, Health, Damage, Luck, Speed, Dexterity, Defense
@@ -30,6 +36,7 @@ EntityType -
         Methods:
             Inherits Display method from IStoryElement
 WorldInteraction -
+
     Class: InteractWorld
         Methods:
             InteractLocation:
