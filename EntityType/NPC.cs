@@ -11,6 +11,7 @@ namespace EntityType
     {
         public List<Dialogue> Dialogues { get; set; }
         public string DisplayText { get; set; }
+
         public NPC(string name, int health, int damage, int luck, int speed, int dexterity, int defense) 
         {
             Name = name;
