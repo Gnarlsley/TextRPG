@@ -26,7 +26,7 @@ namespace EntityType
         public string DisplayStats()
         {
             string msg = "";
-            if(this.Health == -1)
+            if(Health == -1)
             {
                 msg += "Name: unknown\n" +
                         "Health: unknown\n" +
@@ -38,13 +38,13 @@ namespace EntityType
             }
             else
             {
-                msg += "Name: " + this.Name + 
-                    "\nHealth: " + this.Health + 
-                    "\nDamage: " + this.Damage + 
-                    "\nLuck: " + this.Luck + 
-                    "\nSpeed: " + this.Speed + 
-                    "\nDexterity: " + this.Dexterity + 
-                    "\nDefense: " + this.Defense;
+                msg += "Name: " + Name + 
+                    "\nHealth: " + Health + 
+                    "\nDamage: " + Damage + 
+                    "\nLuck: " + Luck + 
+                    "\nSpeed: " + Speed + 
+                    "\nDexterity: " + Dexterity + 
+                    "\nDefense: " + Defense;
             }
             return msg;
         }

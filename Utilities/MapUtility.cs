@@ -3,7 +3,7 @@ using TextRPG;
 
 namespace Utilities
 {
-    class MapUtility
+    static class MapUtility
     {
         public static Location[] PreloadMapTiles(int rows)
         {

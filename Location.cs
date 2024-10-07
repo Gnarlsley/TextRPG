@@ -9,6 +9,7 @@ namespace TextRPG
         public string Description { get; set; }
         public string DisplayText { get; set; }
         public string[] ApproachText { get; set; }
+        public List<Enemy> Enemies { get; set; }
         public NPC? NPC { get; set; }
 
      //   public Dictionary<string, ItemInfo> contents = new Dictionary<string, ItemInfo>();

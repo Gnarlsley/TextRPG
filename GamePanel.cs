@@ -35,6 +35,7 @@ class GamePanel
 
         var commandActions = InitializeCommandActions(player);
         InitializeNPC();
+        InitializeEnemies();
         
         GameLoop(commandActions);
     }
@@ -78,7 +79,8 @@ class GamePanel
             { new[] { "examine", "look around" }, MapUtility.examineLocation },
             { new[] { "charges" }, () => Console.WriteLine(player.DisplayCharges()) },
             { new[] { "stats" }, () => Console.WriteLine(player.DisplayStats()) },
-            { new[] { "talk", "speak" }, () => InteractWorld.InteractLocation()}
+            { new[] { "talk", "speak" }, () => InteractWorld.InteractLocation() },
+            { new[] { "battle", "fight", "attack" }, () => InteractWorld.StartBattle(player) }
         };
     }
 
@@ -91,7 +93,7 @@ class GamePanel
 
         Random rdm = new Random();
 
-        Player player = new Player(name, 10, 3, rdm.Next(1, 6), 5, 3, 5);
+        Player player = new Player(name, 100, 3, rdm.Next(1, 6), 5, 3, 5);
 
         //Fog, mist
         Console.WriteLine("Welcome " + player.Name + " to the world of Caligo.");
@@ -116,6 +118,17 @@ class GamePanel
         Gerald.Dialogues.Add(new Dialogue("About time I see a friendly face around here.", DialogueType.Mood.Positive));
         Gerald.Dialogues.Add(new Dialogue("I've lasted this long without any help, I don't need you.", DialogueType.Mood.Negative));
         mapLocations[0].NPC = Gerald;
+    }
+
+    private static void InitializeEnemies()
+    {
+        List<Enemy> Enemies = new List<Enemy>
+        {
+            new Enemy("Goblin", 10, 2, 5, 5, 5, 5),
+            new Enemy("Hobgoblin", 15, 5, 2, 2, 2, 2)
+        } ;
+
+        mapLocations[1].Enemies = Enemies;
     }
 
     private static void GameLoop(Dictionary<string[], Action> commandActions)
@@ -146,7 +159,7 @@ class GamePanel
             //check player position after moving
             bool isAtLocation = MapUtility.IsAtLocation();
 
-            if (!commandFound)
+            if (!commandFound && input != "quit" && input != "exit")
             {
                 Console.WriteLine("Invalid command. Please enter a valid command or 'quit' to exit.");
             }

@@ -1,10 +1,32 @@
 using Utilities;
 using TextRPG;
 using DialogueType;
+using EntityType;
 namespace WorldInteraction
 {
-    class InteractWorld
+    static class InteractWorld
     {
+        public static void StartBattle(Player player)
+        {
+            Location? currentLocation = MapUtility.GetLocation();
+
+            if (currentLocation != null && currentLocation.Enemies != null)
+            {
+                if (currentLocation.Enemies.Count > 0)
+                {
+                    TurnManager turnManager = new TurnManager(player, currentLocation.Enemies);
+                    turnManager.StartTurn();
+                }
+                else
+                {
+                    Console.WriteLine("There are no enemies left");
+                }
+            }
+            else
+            {
+                Console.WriteLine("There is no need to fight");
+            }
+        }
         public static void InteractLocation()
         {
             Location? currentLocation = MapUtility.GetLocation();
